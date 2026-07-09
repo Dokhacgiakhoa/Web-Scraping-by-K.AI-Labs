@@ -1,0 +1,41 @@
+:root { color-scheme: light dark; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  padding: 12px;
+  font-size: 13px;
+}
+h1 { font-size: 1.1rem; margin-bottom: 8px; }
+h2 { font-size: 1rem; margin-top: 16px; }
+label { display: block; margin-top: 10px; font-size: 0.85rem; }
+input, textarea {
+  width: 100%;
+  padding: 6px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  font: inherit;
+}
+button {
+  margin-top: 10px;
+  margin-right: 6px;
+  padding: 6px 10px;
+  font: inherit;
+  cursor: pointer;
+}
+.muted { opacity: 0.7; font-size: 0.8rem; }
+.hidden { display: none; }
+.check {
+  border: 1px solid #8883;
+  border-radius: 6px;
+  padding: 8px;
+  margin-top: 8px;
+}
+.check .badge {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.75rem;
+  margin-right: 6px;
+}
+.badge.pass { background: #16a34a33; color: #16a34a; }
+.badge.warn { background: #ca8a0433; color: #ca8a04; }
+.badge.fail { background: #dc262633; color: #dc2626; }

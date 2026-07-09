@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Web Scraping by K.AI Labs",
+  "version": "0.1.0",
+  "description": "AI-first SEO checker for any page. Bring your own AI API key.",
+  "action": {},
+  "side_panel": { "default_path": "sidepanel/sidepanel.html" },
+  "background": { "service_worker": "background/index.js", "type": "module" },
+  "content_scripts": [
+    {
+      "matches": ["*://*/extension/connect*"],
+      "js": ["content/auth-relay.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": ["storage", "sidePanel", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"]
+}

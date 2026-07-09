@@ -1,0 +1,78 @@
+<% var title = 'Dashboard - K.AI Labs' %>
+<%- include('partials/layout-head', { title }) %>
+
+<h1>Hi, <%= email %></h1>
+
+<div class="card">
+  <h2>1. Connect the extension</h2>
+  <p class="muted">Open this link from the browser where the extension is installed, then click "Connect" in the side panel.</p>
+  <a href="/extension/connect"><button type="button">Open connect page</button></a>
+</div>
+
+<div class="card">
+  <h2>2. AI API key</h2>
+  <p class="muted">Bring your own key. It's encrypted before being stored and never shown again in full.</p>
+  <form id="key-form">
+    <label>Provider
+      <select name="provider">
+        <option value="ANTHROPIC">Anthropic (Claude)</option>
+        <option value="OPENAI">OpenAI</option>
+        <option value="GOOGLE">Google AI</option>
+      </select>
+    </label>
+    <label>API key <input type="password" name="apiKey" required /></label>
+    <button type="submit">Save key</button>
+  </form>
+  <p id="key-error" class="error"></p>
+  <p class="muted">Configured providers:
+    <% if (keys.length === 0) { %>none yet<% } else { %>
+      <%= keys.map(function(k) { return k.provider; }).join(', ') %>
+    <% } %>
+  </p>
+</div>
+
+<div class="card">
+  <h2>3. Recent results</h2>
+  <% if (results.length === 0) { %>
+    <p class="muted">No checks run yet. Use the extension side panel on any page.</p>
+  <% } else { %>
+    <ul>
+      <% results.forEach(function(r) { %>
+        <li>
+          <strong><%= r.type %></strong> — <%= r.url %>
+          <span class="muted">(<%= new Date(r.createdAt).toLocaleString() %>)</span>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</div>
+
+<form id="logout-form" style="margin-top: 24px;">
+  <button type="submit">Log out</button>
+</form>
+
+<script>
+  document.getElementById('key-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const res = await fetch('/api/keys', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ provider: form.get('provider'), apiKey: form.get('apiKey') }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      document.getElementById('key-error').textContent = data.error || 'Could not save key';
+      return;
+    }
+    window.location.reload();
+  });
+
+  document.getElementById('logout-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await fetch('/api/auth/logout', { method: 'POST' });
+    window.location.href = '/login';
+  });
+</script>
+
+<%- include('partials/layout-foot') %>

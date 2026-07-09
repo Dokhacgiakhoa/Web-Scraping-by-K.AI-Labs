@@ -1,0 +1,15 @@
+{
+  "name": "web-scraping-by-kai-labs",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "backend",
+    "extension"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=backend",
+    "build:backend": "npm run build --workspace=backend",
+    "dev:extension": "npm run dev --workspace=extension",
+    "build:extension": "npm run build --workspace=extension"
+  }
+}

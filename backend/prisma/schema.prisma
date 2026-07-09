@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+
+  apiKeys      ApiKey[]
+  results      ScrapeResult[]
+}
+
+enum AiProvider {
+  OPENAI
+  ANTHROPIC
+  GOOGLE
+}
+
+model ApiKey {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider     AiProvider
+  encryptedKey String
+  createdAt    DateTime   @default(now())
+
+  @@unique([userId, provider])
+}
+
+model ScrapeResult {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type       String
+  url        String
+  resultJson String
+  createdAt  DateTime @default(now())
+
+  @@index([userId, createdAt])
+}

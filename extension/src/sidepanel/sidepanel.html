@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>K.AI Labs</title>
+  <link rel="stylesheet" href="./sidepanel.css" />
+</head>
+<body>
+  <h1>Web Scraping by K.AI Labs</h1>
+
+  <section id="disconnected-view">
+    <p class="muted">Connect your K.AI Labs account to run SEO checks.</p>
+    <label>Web app URL
+      <input id="base-url" type="text" value="http://localhost:3000" />
+    </label>
+    <button id="open-connect-btn">Open connect page</button>
+    <p class="muted">Log in on the page that opens, then come back here — this panel updates
+    automatically once connected.</p>
+  </section>
+
+  <section id="connected-view" class="hidden">
+    <p>Connected as <strong id="connected-email"></strong> <button id="logout-btn">Log out</button></p>
+
+    <label>What do you want to check on this page?
+      <textarea id="prompt-input" rows="3" placeholder="e.g. check this page's SEO"></textarea>
+    </label>
+    <button id="analyze-btn">Analyze this page</button>
+    <p id="status" class="muted"></p>
+
+    <div id="results" class="hidden">
+      <h2>Results</h2>
+      <div id="results-list"></div>
+      <button id="export-json-btn">Export JSON</button>
+      <button id="export-csv-btn">Export CSV</button>
+    </div>
+  </section>
+
+  <script type="module" src="./sidepanel.js"></script>
+</body>
+</html>

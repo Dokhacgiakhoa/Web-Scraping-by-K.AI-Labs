@@ -1,0 +1,15 @@
+<% var title = 'Connect extension - K.AI Labs' %>
+<%- include('partials/layout-head', { title }) %>
+
+<h1>Connect the K.AI Labs extension</h1>
+<p>Logged in as <strong><%= email %></strong>.</p>
+<p class="muted">Leave this tab open. Open the K.AI Labs side panel and click "Connect" — it will
+pick up your session automatically from this page.</p>
+
+<!--
+  The extension's auth-relay content script (matches only this exact path) reads the token below
+  and relays it to the extension background via window.postMessage. It is never displayed.
+-->
+<div id="kai-connect-token" data-token="<%= token %>" style="display:none"></div>
+
+<%- include('partials/layout-foot') %>

@@ -1,0 +1,32 @@
+<% var title = 'Sign up - K.AI Labs' %>
+<%- include('partials/layout-head', { title }) %>
+
+<h1>Create your K.AI Labs account</h1>
+
+<form id="signup-form">
+  <label>Email <input type="email" name="email" required /></label>
+  <label>Password (min 8 characters) <input type="password" name="password" required minlength="8" /></label>
+  <button type="submit">Sign up</button>
+</form>
+<p id="form-error" class="error"></p>
+<p class="muted">Already have an account? <a href="/login">Log in</a></p>
+
+<script>
+  document.getElementById('signup-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: form.get('email'), password: form.get('password') }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      document.getElementById('form-error').textContent = data.error || 'Sign up failed';
+      return;
+    }
+    window.location.href = '/dashboard';
+  });
+</script>
+
+<%- include('partials/layout-foot') %>
