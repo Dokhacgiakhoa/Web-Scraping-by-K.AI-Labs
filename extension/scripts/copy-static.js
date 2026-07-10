@@ -17,4 +17,6 @@ fs.copyFileSync(
   path.join(dist, "sidepanel", "sidepanel.css")
 );
 
-console.log("Copied manifest.json and sidepanel static assets into dist/");
+fs.cpSync(path.join(root, "icons"), path.join(dist, "icons"), { recursive: true });
+
+console.log("Copied manifest.json, sidepanel static assets, and icons into dist/");

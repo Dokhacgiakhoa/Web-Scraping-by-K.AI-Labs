@@ -16,6 +16,10 @@ pagesRouter.get("/signup", (_req, res) => {
   res.render("signup", { error: null });
 });
 
+pagesRouter.get("/privacy", (_req, res) => {
+  res.render("privacy");
+});
+
 pagesRouter.get("/dashboard", requireAuthPage, async (req, res) => {
   const [keys, results] = await Promise.all([
     prisma.apiKey.findMany({ where: { userId: req.user!.userId } }),

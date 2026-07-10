@@ -1,0 +1,59 @@
+<% var title = 'Privacy Policy - K.AI Labs' %>
+<%- include('partials/layout-head', { title }) %>
+
+<h1>Privacy Policy</h1>
+<p class="muted">Last updated: July 2026</p>
+
+<p>
+  "Web Scraping by K.AI Labs" (the "Extension") and its companion web app ("K.AI Labs",
+  "we") help you run SEO checks on web pages using an AI model of your choice. This page
+  explains what data we collect, how it's used, and how it's protected.
+</p>
+
+<h2>What we collect</h2>
+<ul>
+  <li><strong>Account info</strong>: the email and password you sign up with. Passwords are
+    hashed (bcrypt) and never stored in plain text.</li>
+  <li><strong>Your AI API key</strong>: you bring your own key (OpenAI, Anthropic, or Google AI).
+    It is encrypted at rest (AES-256-GCM) before being stored and is only decrypted in memory,
+    server-side, to make the AI request you triggered. We never display it back to you in full,
+    and never share it with anyone other than the provider you chose, to fulfill your request.</li>
+  <li><strong>Page data you choose to analyze</strong>: when you click "Analyze this page" in the
+    Extension, on-page content (title, meta tags, headings, structured data, links, performance
+    timing) from the currently open tab is read, sent to your chosen AI provider to plan the
+    check, and the resulting findings are sent to our backend to display results and save your
+    history. This only happens when you explicitly trigger it — the Extension does not scan pages
+    in the background.</li>
+  <li><strong>Check history</strong>: the URL, check type, and results of each analysis you run,
+    tied to your account, so you can review past checks on your dashboard.</li>
+</ul>
+
+<h2>What we don't do</h2>
+<ul>
+  <li>We don't sell or share your data with advertisers or data brokers.</li>
+  <li>We don't read page content unless you explicitly run a check on that page.</li>
+  <li>We don't store your AI API key in plain text, and we don't use it for anything other than
+    the request you made.</li>
+</ul>
+
+<h2>Why the Extension asks for broad permissions</h2>
+<ul>
+  <li><strong>Read/change data on all websites</strong>: needed so you can run an SEO check on
+    any page you're viewing, not just a fixed list of sites.</li>
+  <li><strong>Storage</strong>: used locally in your browser to keep you signed in.</li>
+  <li><strong>Scripting</strong>: used to run the on-page scan when you click "Analyze", and only
+    then.</li>
+</ul>
+
+<h2>Your controls</h2>
+<p>
+  You can remove a stored AI API key at any time from your dashboard. You can log out of the
+  Extension at any time, which deletes the locally stored session token. To delete your account
+  and all associated data, contact us using the details below.
+</p>
+
+<h2>Contact</h2>
+<p class="muted">Replace this with a real contact email before publishing to the Chrome Web
+Store.</p>
+
+<%- include('partials/layout-foot') %>
