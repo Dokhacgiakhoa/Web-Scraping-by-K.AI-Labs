@@ -25,8 +25,11 @@ apiKeysRouter.post("/api/keys", requireAuth, async (req, res) => {
   if (!isValidProvider(provider)) {
     return res.status(400).json({ error: `provider must be one of ${VALID_PROVIDERS.join(", ")}` });
   }
-  if (typeof apiKey !== "string" || apiKey.trim().length < 8) {
+  if (typeof apiKey !== "string" || apiKey.trim().length === 0) {
     return res.status(400).json({ error: "apiKey is required" });
+  }
+  if (apiKey.trim().length < 8) {
+    return res.status(400).json({ error: "apiKey must be at least 8 characters long" });
   }
 
   const encryptedKey = encryptSecret(apiKey.trim());
